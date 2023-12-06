@@ -1,0 +1,8 @@
+obj/
+bin/
+wwwroot/
+*.db
+*.db-shm
+*.db-wal
+
+Data/Migrations/

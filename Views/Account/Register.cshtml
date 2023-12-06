@@ -1,0 +1,180 @@
+@model FacebookClone.ViewModels.RegisterViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClockBook Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .name-info {
+            display: flex;
+            width: 100%;
+        }
+
+        #GivenName {
+            margin-right: 5px;
+        }
+
+        #SurName {
+            margin-left: 5px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1877f2;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .date-select
+        {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .date{
+            display: flex;
+            flex-direction: column;
+            width: 8rem;
+            
+        }
+        
+        .radio-group{
+            display: flex;
+        }
+
+        .radio-group label{
+            border: 1px solid #ccc;
+            margin-left: 20px;
+            padding: 0px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 5rem;
+        }
+
+        .radio-group label input{
+            margin: 1px 0px 0px 9px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            background-color: #1877f2;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #135e96;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Sign Up for ClockBook</h2>
+        <form asp-controller="Account" asp-action="Register" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="name-info">
+                <input asp-for="GivenName" placeholder="Enter Your Given Name" type="text" >
+
+                <input asp-for="SurName" placeholder="Enter Your SurName" type="text" >
+            </div>
+
+            <div style="width: 96%;">
+
+            <input asp-for="Email" placeholder="Enter Your Email" type="email" >
+
+            <input asp-for="Password" placeholder="Enter Your Password" type="password" >
+
+            <input asp-for="ConfirmPassword" placeholder="Confirm Your Password" type="password" >
+
+            </div>
+            <div>
+                <div class="date-select">
+                <div class="date">
+                    <label asp-for="SelectedDay">Day:</label>
+                    @Html.DropDownListFor(model => model.SelectedDay, Model.DayOptions, new { @class = "form-control" })
+                </div>
+                <div class="date">
+                    <label asp-for="SelectedMonth">Month:</label>
+                    @Html.DropDownListFor(model => model.SelectedMonth, Model.MonthOptions, new
+                        {
+                            @class =
+                             "form-control"
+                        })
+                </div>
+                <div class="date">
+                    <label asp-for="SelectedYear">Year:</label>
+                    @Html.DropDownListFor(model => model.SelectedYear, Model.YearOptions, new
+                        {
+                            @class = "form-control"
+                        })
+                </div>
+
+                </div>
+                
+                <div class="radio-group">
+                    <p>Select Your Genera:</p>
+                    <label>
+                        Male
+                        <input asp-for="@Model.Genera" type="radio" name="genera" value="Male" checked="@Model.Genera == Genera.Male">
+                    </label>
+                    <label>
+                        Female
+                        <input asp-for="@Model.Genera" type="radio" name="genera" value="Female" checked="@Model.Genera == Genera.Female">
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
